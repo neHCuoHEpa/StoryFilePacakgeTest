@@ -1,0 +1,11 @@
+{
+    "name": "com.storyfile.package",
+    "displayName": "StoryFile Package",
+    "version": "1.2.0",
+    "unity": "2019.1",
+    "description": "Storyfile interactive interviews work by listening to a user’s question and playing back the video containing the best answer. The necessary elements are a resting pose video, played on loop, the answer video, and an “I can’t answer that” video if there is no appropriate answer given in the interview. The user interaction is a button that is held down to let the user speak, and released when they are finished.",
+    "keywords": ["storyfile", "video"],
+    "category": "Interaction",
+    "dependencies": {
+    }
+}
