@@ -7,5 +7,6 @@
     "keywords": ["storyfile", "video"],
     "category": "Interaction",
     "dependencies": {
+        "com.unity.textmeshpro": "3.0.0"
     }
 }

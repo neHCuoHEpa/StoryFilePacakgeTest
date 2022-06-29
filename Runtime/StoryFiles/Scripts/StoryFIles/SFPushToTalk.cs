@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using TMPro;
+using TMP;
 
 
 namespace StoryFiles
