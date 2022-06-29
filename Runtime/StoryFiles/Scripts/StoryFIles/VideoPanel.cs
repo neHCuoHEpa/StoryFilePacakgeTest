@@ -1,17 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-using RenderHeads.Media.AVProVideo;
-using UnityEngine.Networking;
+﻿using UnityEngine;
 
+#if SF_USING_AVPRO2
+using RenderHeads.Media.AVProVideo;
+#endif
 
 namespace StoryFiles
 {
     public class VideoPanel : MonoBehaviour, IVideoPanel
     {
         // UI elements
+#if SF_USING_AVPRO2
         public MediaPlayer waitingMediaPlayer;
         public MediaPlayer noAnswerMediaPlayer;
         public MediaPlayer answerMediaPlayer;
@@ -19,6 +17,7 @@ namespace StoryFiles
         public DisplayUGUI waitingDisplayGUI;
         public DisplayUGUI noAnswerDisplayGUI;
         public DisplayUGUI answerDisplayGUI;
+#endif
 
         private string waitingVideoURL = "";
         private bool isWaitingVideoLoaded = false;
@@ -45,6 +44,7 @@ namespace StoryFiles
             FadeOut
         }
 
+#if SF_USING_AVPRO2
         private void Awake()
         {
             waitingMediaPlayer.Events.AddListener(OnMediaPlayerEvent);
@@ -71,6 +71,7 @@ namespace StoryFiles
             answerVideoState = VideoState.Idle;
             noAnswerVideoState = VideoState.Idle;
         }
+#endif
 
         private void OnDisable()
         {
@@ -89,6 +90,7 @@ namespace StoryFiles
 
         private void Update()
         {
+#if SF_USING_AVPRO2
             float alpha = 0;
             if (waitingVideoState != VideoState.Idle)
             {
@@ -152,6 +154,7 @@ namespace StoryFiles
                     }
                 }
             }
+#endif
         }
 
         float AlphaFor(VideoState state, float time)
@@ -181,6 +184,7 @@ namespace StoryFiles
         /// </summary>
         public void PlayWaitingVideo()
         {
+#if SF_USING_AVPRO2
             answerMediaPlayer.Stop();
             noAnswerMediaPlayer.Stop();
             if (isWaitingVideoLoaded)
@@ -199,10 +203,12 @@ namespace StoryFiles
                 waitingMediaPlayer.OpenMedia(MediaPathType.AbsolutePathOrURL, waitingVideoURL, true);
 #endif
             }
+#endif
         }
 
         public void PlayNoAnswerVideo()
         {
+#if SF_USING_AVPRO2
             answerMediaPlayer.Stop();
             if (isNoAnswerVideoLoaded)
             {
@@ -223,6 +229,7 @@ namespace StoryFiles
                 noAnswerMediaPlayer.OpenMedia(MediaPathType.AbsolutePathOrURL, noAnswerVideoURL, true);
 #endif
             }
+#endif
         }
 
         public void PlayAnswerVideo(string url, string metafile = "")
@@ -240,11 +247,14 @@ namespace StoryFiles
 
         public void SetVolume(float volume)
         {
+#if SF_USING_AVPRO2
             waitingMediaPlayer.Control.SetVolume(volume);
             noAnswerMediaPlayer.Control.SetVolume(volume);
             answerMediaPlayer.Control.SetVolume(volume);
+#endif
         }
 
+#if SF_USING_AVPRO2
         public void OnMediaPlayerEvent(MediaPlayer mp, MediaPlayerEvent.EventType et, ErrorCode errorCode)
         {
             switch (et)
@@ -292,6 +302,7 @@ namespace StoryFiles
                     break;
             }
         }
+#endif
     }
 
 }
